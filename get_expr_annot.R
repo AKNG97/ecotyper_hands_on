@@ -32,32 +32,32 @@ dim(annot)
 
 #### Get TCGA data ####
 
-qry.rna_COAD <- GDCquery(project = "TCGA-COAD",
-                          data.category= "Transcriptome Profiling",
-                          data.type = "Gene Expression Quantification",
-                          workflow.type = "STAR - Counts")
-GDCdownload(qry.rna_COAD)
-COAD <- GDCprepare(qry.rna_COAD, summarizedExperiment = TRUE) 
+qry.rna_NBL <- GDCquery(project = "TARGET-NBL",
+                         data.category= "Transcriptome Profiling",
+                         data.type = "Gene Expression Quantification",
+                         workflow.type = "STAR - Counts")
+GDCdownload(qry.rna_NBL)
+NBL <- GDCprepare(qry.rna_NBL, summarizedExperiment = TRUE) 
 
 #Get TPM
-COAD
-COADL_TPM <- assay(COAD, 4)
+NBL
+NBLL_TPM <- assay(NBL, 4)
 
-colnames(COADL_TPM) <- gsub("-", "\\.", colnames(COADL_TPM))
-rownames(COADL_TPM) <- rowData(COAD)$gene_name
-length(which(duplicated(rownames(COADL_TPM))))
-dim(COADL_TPM)
-COADL_TPM <- COADL_TPM[!duplicated(rownames(COADL_TPM)),]
-dim(COADL_TPM)
-COADL_TPM <- COADL_TPM[row.names(COADL_TPM) %in% annot$HGNC_symbol,]
-dim(COADL_TPM)
+colnames(NBLL_TPM) <- gsub("-", "\\.", colnames(NBLL_TPM))
+rownames(NBLL_TPM) <- rowData(NBL)$gene_name
+length(which(duplicated(rownames(NBLL_TPM))))
+dim(NBLL_TPM)
+NBLL_TPM <- NBLL_TPM[!duplicated(rownames(NBLL_TPM)),]
+dim(NBLL_TPM)
+NBLL_TPM <- NBLL_TPM[row.names(NBLL_TPM) %in% annot$HGNC_symbol,]
+dim(NBLL_TPM)
 
-COADL_TPM <- cbind(rownames(COADL_TPM), COADL_TPM)
-colnames(COADL_TPM)[1] <- "Gene"
-write.table(COADL_TPM, file = "rnas_COADL_TPM_PC.txt", row.names = FALSE, sep = "\t", quote = FALSE, col.names = TRUE)
+NBLL_TPM <- cbind(rownames(NBLL_TPM), NBLL_TPM)
+colnames(NBLL_TPM)[1] <- "Gene"
+write.table(NBLL_TPM, file = "rnas_NBLL_TPM_PC.txt", row.names = FALSE, sep = "\t", quote = FALSE, col.names = TRUE)
 
 #Get clinical annot 
-clinical_info <- as.data.frame(colData(COAD))
+clinical_info <- as.data.frame(colData(NBL))
 
 rownames(clinical_info) <- gsub("-", "\\.", rownames(clinical_info))
 clinical_info$sample <- gsub("-", "\\.", clinical_info$sample)
@@ -65,4 +65,4 @@ clinical_info <- clinical_info %>% mutate(ID=sample)
 
 colnames(clinical_info)
 
-write.table(clinical_info, file = "clinical_info_COAD.txt", row.names = FALSE, sep = "\t", quote = FALSE, col.names = TRUE)
+write.table(clinical_info, file = "clinical_info_NBL_tets.txt", row.names = FALSE, sep = "\t", quote = FALSE, col.names = TRUE)
