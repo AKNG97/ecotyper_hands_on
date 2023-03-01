@@ -61,4 +61,4 @@ clinical_info <- clinical_info %>% mutate(ID=sample)
 
 colnames(clinical_info)
 
-write.table(clinical_info, file = "clinical_info_NBL_tets.txt", row.names = FALSE, sep = "\t", quote = FALSE, col.names = TRUE)
+write.table(clinical_info[1:60,], file = "clinical_info_NBL_tets.txt", row.names = FALSE, sep = "\t", quote = FALSE, col.names = TRUE)
