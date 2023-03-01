@@ -10,7 +10,7 @@ git clone https://github.com/digitalcytometry/ecotyper
 
 cd ecotyper
 
-3. Obtener imagenes de singularity desde el servidor de su preferencia (1, 2 o 3):
+3. Obtener imagenes de singularity desde el servidor de su preferencia (1, 3 o 4):
 
 /home/anakamura/cibersort_fractions.sif, /home/anakamura/cibersort_hires.sif
 
