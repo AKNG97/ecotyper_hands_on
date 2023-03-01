@@ -32,8 +32,6 @@ dim(annot)
 
 #### Get TCGA data ####
 
-#DLBCL 
-
 qry.rna_COAD <- GDCquery(project = "TCGA-COAD",
                           data.category= "Transcriptome Profiling",
                           data.type = "Gene Expression Quantification",
@@ -41,7 +39,7 @@ qry.rna_COAD <- GDCquery(project = "TCGA-COAD",
 GDCdownload(qry.rna_COAD)
 COAD <- GDCprepare(qry.rna_COAD, summarizedExperiment = TRUE) 
 
-##### Prep for ecotyper, add SACS-AS1 ####
+#Get TPM
 COAD
 COADL_TPM <- assay(COAD, 4)
 
@@ -58,6 +56,7 @@ COADL_TPM <- cbind(rownames(COADL_TPM), COADL_TPM)
 colnames(COADL_TPM)[1] <- "Gene"
 write.table(COADL_TPM, file = "rnas_COADL_TPM_PC.txt", row.names = FALSE, sep = "\t", quote = FALSE, col.names = TRUE)
 
+#Get clinical annot 
 clinical_info <- as.data.frame(colData(COAD))
 
 rownames(clinical_info) <- gsub("-", "\\.", rownames(clinical_info))
