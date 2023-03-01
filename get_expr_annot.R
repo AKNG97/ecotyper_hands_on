@@ -2,10 +2,6 @@
 
 library(SummarizedExperiment)
 library(TCGAbiolinks)
-require(EDASeq)
-require(dplyr)
-require(NOISeq)
-library(DESeq2)
 library(biomaRt)
 
 ensembl <- useEnsembl(biomart = "genes", dataset = "hsapiens_gene_ensembl", mirror = "www")
