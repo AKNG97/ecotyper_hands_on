@@ -54,7 +54,7 @@ dim(NBLL_TPM)
 
 NBLL_TPM <- cbind(rownames(NBLL_TPM), NBLL_TPM)
 colnames(NBLL_TPM)[1] <- "Gene"
-write.table(NBLL_TPM, file = "rnas_NBLL_TPM_PC.txt", row.names = FALSE, sep = "\t", quote = FALSE, col.names = TRUE)
+write.table(NBLL_TPM[,1:61], file = "rnas_NBLL_TPM_PC.txt", row.names = FALSE, sep = "\t", quote = FALSE, col.names = TRUE)
 
 #Get clinical annot 
 clinical_info <- as.data.frame(colData(NBL))
